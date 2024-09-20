@@ -1,25 +1,30 @@
+// src/App.tsx
 import React from "react";
-import ProductList from "./components/ProductList";
-import "./index.css"; // You can add your CSS here
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+import HomePage from "./components/HomePage";
+import CompanyDetailsPage from "./components/CompanyDetailsPage";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import AboutPage from "./components/AboutPage";
+import ContactPage from "./components/ContactPage";
+import SubmitPage from "./components/SubmitPage";
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm py-6">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-extrabold text-gray-900">
-            D2C Product Explorer
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Discover and upvote your favorite Direct-to-Consumer products!
-          </p>
-        </div>
-      </header>
-
-      <main className="container mx-auto px-4 py-10">
-        <ProductList />
-      </main>
-    </div>
+    <ChakraProvider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/submit" element={<SubmitPage />} />
+          <Route path="/companies/:id" element={<CompanyDetailsPage />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </ChakraProvider>
   );
 };
 
